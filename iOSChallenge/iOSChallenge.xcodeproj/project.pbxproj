@@ -14,6 +14,7 @@
 		09847C4C2409B4B400106414 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 09847C4B2409B4B400106414 /* Assets.xcassets */; };
 		09847C4F2409B4B400106414 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09847C4D2409B4B400106414 /* LaunchScreen.storyboard */; };
 		09847C5A2409B4B500106414 /* iOSChallengeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09847C592409B4B500106414 /* iOSChallengeTests.swift */; };
+		09847C682409B5A800106414 /* HygeneChartData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09847C672409B5A800106414 /* HygeneChartData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +39,7 @@
 		09847C552409B4B500106414 /* iOSChallengeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iOSChallengeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		09847C592409B4B500106414 /* iOSChallengeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSChallengeTests.swift; sourceTree = "<group>"; };
 		09847C5B2409B4B500106414 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		09847C672409B5A800106414 /* HygeneChartData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HygeneChartData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +81,9 @@
 		09847C412409B4B000106414 /* iOSChallenge */ = {
 			isa = PBXGroup;
 			children = (
+				09847C662409B58400106414 /* Models */,
+				09847C652409B57B00106414 /* Controllers */,
+				09847C642409B56F00106414 /* Supporting files */,
 				09847C422409B4B000106414 /* AppDelegate.swift */,
 				09847C442409B4B000106414 /* SceneDelegate.swift */,
 				09847C462409B4B000106414 /* ViewController.swift */,
@@ -97,6 +102,28 @@
 				09847C5B2409B4B500106414 /* Info.plist */,
 			);
 			path = iOSChallengeTests;
+			sourceTree = "<group>";
+		};
+		09847C642409B56F00106414 /* Supporting files */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Supporting files";
+			sourceTree = "<group>";
+		};
+		09847C652409B57B00106414 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		09847C662409B58400106414 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				09847C672409B5A800106414 /* HygeneChartData.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -200,6 +227,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				09847C682409B5A800106414 /* HygeneChartData.swift in Sources */,
 				09847C472409B4B000106414 /* ViewController.swift in Sources */,
 				09847C432409B4B000106414 /* AppDelegate.swift in Sources */,
 				09847C452409B4B000106414 /* SceneDelegate.swift in Sources */,
