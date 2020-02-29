@@ -6,7 +6,7 @@
 //  Copyright © 2020 Oniel Rosario. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 enum EndpointModifiers: String {
     case onielChallenge = "ios-code-challenge-orosario"
@@ -15,15 +15,15 @@ enum EndpointModifiers: String {
 
 
 final class APIClient {
-    static func getData(endpointModifier: String, page: Int = 1, completionHandler: @escaping([HygeneChartData]?,Error?) -> Void ) {
+    static func getData(endpointModifier: String, page: Int, completionHandler: @escaping([HygeneChartData]?,Error?, Int?) -> Void ) {
         let endpoint = "https://raw.githubusercontent.com/rune-labs/\(endpointModifier)/master/api/\(page).json"
         guard let url = URL(string: endpoint) else { return }
         URLSession.shared.dataTask(with: url) { (data, _, error) in
             if let error = error {
-                completionHandler(nil, error)
+                completionHandler(nil, error, nil)
             } else if let data = data {
                 let chartData = try? JSONDecoder().decode([HygeneChartData].self, from: data)
-                completionHandler(chartData, nil)
+                completionHandler(chartData, nil, page)
             }
         }.resume()
     }

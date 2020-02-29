@@ -11,33 +11,54 @@ import Charts
 
 class ViewController: UIViewController {
     @IBOutlet weak var chartView: LineChartView!
+    fileprivate var currentPage = 1
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
     }
+    
     fileprivate func setupUI() {
-        chartView.gridBackgroundColor = .white
-        APIClient.getData(endpointModifier: EndpointModifiers.onielChallenge.rawValue) { (chartData, error) in
-            if let error = error {
-                print(error.localizedDescription)
-            } else if let chartData = chartData {
-                DispatchQueue.main.async {
-                    self.chartView.data = self.modifyChartView(chartData)
-                }
-            }
-        }
-        
+        chartView.pinchZoomEnabled = true
+        chartView.tintColor = .white
+        updateChartByPage(page: currentPage)
     }
-    fileprivate func modifyChartView(_ data: [HygeneChartData]) -> LineChartData {
+    
+    fileprivate func modifyChartView(_ data: [HygeneChartData], page: Int) -> LineChartData {
         let values = data.map { (chartData) -> ChartDataEntry in
             let date = Date(timeIntervalSince1970: Double(chartData.t))
             let formatter = DateFormatter()
-            formatter.dateFormat = "dd"
+            formatter.dateFormat = "d"
             let displayDate = formatter.string(from: date)
             return ChartDataEntry(x: Double(displayDate)!, y: Double(chartData.y))
         }
-        let set1 = LineChartDataSet(entries: values, label: "DataSet 1")
-        return LineChartData(dataSet: set1)
+        let set = LineChartDataSet(entries: values, label: "Number of people - Month \(page)")
+        return LineChartData(dataSet: set)
     }
     
+    fileprivate func updateChartByPage(page: Int) {
+        showSpinner()
+        APIClient.getData(endpointModifier: EndpointModifiers.onielChallenge.rawValue, page: page) { [weak self](data, error, page) in
+            if let error = error {
+                print(error)
+            } else if let data = data {
+                DispatchQueue.main.async {
+                    self?.chartView.data = self?.modifyChartView(data, page: self?.currentPage ?? 0)
+                    self?.removeSpinner()
+                }
+            }
+        }
+    }
+    
+    @IBAction func nextPage(_ sender: UIButton) {
+        currentPage += 1
+        updateChartByPage(page: currentPage)
+    }
+    
+    
+    
+    @IBAction func previousPage(_ sender: UIButton) {
+        currentPage -= 1
+        updateChartByPage(page: currentPage)
+    }
 }
