@@ -26,27 +26,49 @@ class ViewController: UIViewController {
     
     fileprivate func modifyChartView(_ data: [HygeneChartData], page: Int) -> LineChartData {
         let values = data.map { (chartData) -> ChartDataEntry in
-            let date = Date(timeIntervalSince1970: Double(chartData.t))
-            let formatter = DateFormatter()
-            formatter.dateFormat = "d"
-            let displayDate = formatter.string(from: date)
-            return ChartDataEntry(x: Double(displayDate)!, y: Double(chartData.y))
+            let unixFormatted = convertUnixToDate(unix: Double(chartData.t))
+            return ChartDataEntry(x: unixFormatted, y: Double(chartData.y))
         }
         let set = LineChartDataSet(entries: values, label: "Number of people - Month \(page)")
         return LineChartData(dataSet: set)
     }
     
+    fileprivate func convertUnixToDate(unix: Double) -> Double {
+        let date = Date(timeIntervalSince1970: unix)
+        let formatter = DateFormatter()
+        formatter.dateFormat = "d"
+        guard let unixConverted = Double(formatter.string(from: date)) else { return 0}
+        return unixConverted
+    }
+    
     fileprivate func updateChartByPage(page: Int) {
         showSpinner()
-        APIClient.getData(endpointModifier: EndpointModifiers.onielChallenge.rawValue, page: page) { [weak self](data, error, page) in
+        APIClient.getData(endpointModifier: EndpointModifiers.onielChallenge.rawValue, page: page) { [weak self](data, error, page, status ) in
             if let error = error {
-                print(error)
+                print(error.localizedDescription)
+                self?.removeSpinner()
             } else if let data = data {
                 DispatchQueue.main.async {
                     self?.chartView.data = self?.modifyChartView(data, page: self?.currentPage ?? 0)
                     self?.removeSpinner()
                 }
+            } else if let status = status {
+                self?.statusCodeHandler(status: status)
             }
+        }
+    }
+    
+    fileprivate func statusCodeHandler(status: Int) {
+        guard status < 399 else {
+            DispatchQueue.main.async {
+                self.removeSpinner()
+                if self.currentPage < 1 {
+                    self.currentPage = 1
+                } else {
+                    self.currentPage -= 1
+                }
+            }
+            return
         }
     }
     

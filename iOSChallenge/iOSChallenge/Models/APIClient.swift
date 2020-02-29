@@ -15,15 +15,22 @@ enum EndpointModifiers: String {
 
 
 final class APIClient {
-    static func getData(endpointModifier: String, page: Int, completionHandler: @escaping([HygeneChartData]?,Error?, Int?) -> Void ) {
+    static func getData(endpointModifier: String, page: Int, completionHandler: @escaping([HygeneChartData]?,Error?, Int?, Int?) -> Void ) {
         let endpoint = "https://raw.githubusercontent.com/rune-labs/\(endpointModifier)/master/api/\(page).json"
-        guard let url = URL(string: endpoint) else { return }
-        URLSession.shared.dataTask(with: url) { (data, _, error) in
+        guard let url = URL(string: endpoint) else {
+            completionHandler(nil,nil,nil, nil)
+            return
+        }
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
             if let error = error {
-                completionHandler(nil, error, nil)
-            } else if let data = data {
+                completionHandler(nil, error, nil, nil)
+            }
+            if let response = response as? HTTPURLResponse {
+                completionHandler(nil,nil,nil, response.statusCode)
+            }
+            if let data = data {
                 let chartData = try? JSONDecoder().decode([HygeneChartData].self, from: data)
-                completionHandler(chartData, nil, page)
+                completionHandler(chartData, nil, page, nil)
             }
         }.resume()
     }
