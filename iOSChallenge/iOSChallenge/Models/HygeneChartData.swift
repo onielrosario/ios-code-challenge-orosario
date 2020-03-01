@@ -10,6 +10,6 @@ import Foundation
 
 
 struct HygeneChartData: Codable {
-    let t: Int
-    let y: Int
+    let t: Double
+    let y: Double
 }

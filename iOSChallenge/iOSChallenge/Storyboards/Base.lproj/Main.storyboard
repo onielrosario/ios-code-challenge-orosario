@@ -21,10 +21,10 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Data shown in days" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ABL-Ht-obq">
-                                <rect key="frame" x="20" y="115.5" width="148" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Data shown in weeks" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ABL-Ht-obq">
+                                <rect key="frame" x="20" y="116" width="374" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cal-2O-rzS" customClass="LineChartView" customModule="Charts">
@@ -75,28 +75,30 @@
                         </subviews>
                         <color key="backgroundColor" red="0.2689691186" green="0.52239984269999995" blue="0.447052002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ABL-Ht-obq" secondAttribute="trailing" symbolic="YES" id="644-JJ-HIg"/>
-                            <constraint firstItem="Cal-2O-rzS" firstAttribute="top" secondItem="ABL-Ht-obq" secondAttribute="bottom" constant="8" id="8nu-P2-vOi"/>
                             <constraint firstItem="UkM-Pq-LDm" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" symbolic="YES" id="Gb3-Ey-BaZ"/>
                             <constraint firstItem="UkM-Pq-LDm" firstAttribute="top" secondItem="Cal-2O-rzS" secondAttribute="bottom" constant="80" id="Kl0-gl-yha"/>
                             <constraint firstItem="BHu-Ju-zso" firstAttribute="width" secondItem="UkM-Pq-LDm" secondAttribute="width" id="Qlg-r3-B1j"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="o6U-VC-6PP" secondAttribute="trailing" constant="20" id="SLz-QG-47m"/>
-                            <constraint firstItem="ABL-Ht-obq" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="WdW-lA-z4g"/>
+                            <constraint firstItem="ABL-Ht-obq" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="V5e-8l-J5b"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ABL-Ht-obq" secondAttribute="trailing" constant="20" id="WvF-Jt-w9z"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="UkM-Pq-LDm" secondAttribute="trailing" constant="20" id="XGc-As-DII"/>
                             <constraint firstItem="o6U-VC-6PP" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="XaZ-E3-ZDh"/>
                             <constraint firstItem="o6U-VC-6PP" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="Y2H-Js-6nq"/>
                             <constraint firstItem="BHu-Ju-zso" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="b4p-qf-e1S"/>
                             <constraint firstItem="Cal-2O-rzS" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="kEx-L1-tqf"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Cal-2O-rzS" secondAttribute="trailing" constant="20" id="pMs-mL-aPU"/>
-                            <constraint firstItem="ABL-Ht-obq" firstAttribute="top" secondItem="o6U-VC-6PP" secondAttribute="bottom" constant="20" id="ti7-zt-8jP"/>
+                            <constraint firstItem="Cal-2O-rzS" firstAttribute="top" secondItem="ABL-Ht-obq" secondAttribute="bottom" constant="7.5" id="voq-VB-anj"/>
                             <constraint firstItem="UkM-Pq-LDm" firstAttribute="width" secondItem="Cal-2O-rzS" secondAttribute="width" multiplier="0.4" id="w7a-MU-99Y"/>
                             <constraint firstItem="BHu-Ju-zso" firstAttribute="height" secondItem="UkM-Pq-LDm" secondAttribute="height" id="wRe-cY-xT7"/>
                             <constraint firstItem="BHu-Ju-zso" firstAttribute="centerY" secondItem="UkM-Pq-LDm" secondAttribute="centerY" id="yeY-lI-Snn"/>
+                            <constraint firstItem="ABL-Ht-obq" firstAttribute="top" secondItem="o6U-VC-6PP" secondAttribute="bottom" constant="20.5" id="yg9-4O-QBM"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="chartView" destination="Cal-2O-rzS" id="RvH-Ar-MXO"/>
+                        <outlet property="nextButton" destination="UkM-Pq-LDm" id="Qq6-h2-5fu"/>
+                        <outlet property="previousButton" destination="BHu-Ju-zso" id="a3X-LY-RB8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
