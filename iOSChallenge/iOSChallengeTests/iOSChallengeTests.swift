@@ -35,4 +35,24 @@ class iOSChallengeTests: XCTestCase {
         }.resume()
         wait(for: [exp], timeout: 5.0)
     }
+    
+    func testCustomizePageSize() {
+        var currentPage: Int = 1
+        let size: Int = 11000
+        var dataSet = [HygeneChartData]()
+        APIClient.getData(endpointModifier: EndpointModifiers.onielChallenge.rawValue, page: currentPage) { (chartData, error, page, _) in
+            if let error = error {
+                print(error)
+            } else if let chartData = chartData {
+                if chartData.count == size {
+                    dataSet = chartData
+                    print(dataSet.count)
+                } else if chartData.count < size {
+                    dataSet.append(contentsOf: chartData)
+                    currentPage += 1
+                    self.testCustomizePageSize()
+                }
+            }
+        }
+    }
 }
